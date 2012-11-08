@@ -1,4 +1,4 @@
-local function read_current(apikey,feed, datastream) 
+local read_current = function (apikey,feed, datastream) 
 	local response = http.request {
 	method='get',
 	url = 'http://api.cosm.com/v2/feeds/'..feed..'/datastreams/'..datastream,
@@ -11,7 +11,7 @@ local function read_current(apikey,feed, datastream)
 	return json.parse(response.content).current_value
 end
 
-local function read_24h(apikey, feed, datastream) 
+local read_24h = function (apikey, feed, datastream) 
 	local response = http.request {
 	method='get',
 	url = 'http://api.cosm.com/v2/feeds/'..feed..'/datastreams/'..datastream..'/?duration=24hours&interval=60',
