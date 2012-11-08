@@ -35,3 +35,5 @@ local read_24h = function (apikey, feed, datastream)
 
 		
 end
+
+return { read_current = read_current, read_24h = read_24h }
