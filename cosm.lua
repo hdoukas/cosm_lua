@@ -30,13 +30,12 @@ local read_24h = function (apikey, feed, datastream)
 end
 
 -- returns something like: {"datastreams": ["cpu_0,2012-11-08T17:30:28.877620Z,24.50", "cpu_1,2012-11-08T17:30:28.877620Z,26.57"], "size": 2} 
-function list_datastreams(apikey, feed)
+local list_datastreams = function(apikey, feed)
 	local response = http.request {
 	method='get',
 	url = 'http://api.cosm.com/v2/feeds/'..feed..'.csv',
 	headers = { ["X-PachubeApiKey"] = tostring(apikey) } }
 	local datastreams = split(tostring(response.content), '\n')
-	local temp =""
 	
 	return {size=#datastreams, datastreams=datastreams}
 	
@@ -67,7 +66,7 @@ split = function(s, pattern, maxsplit)
   return t
 end
 
-function isAlive(apikey, feed)
+local isAlive = function(apikey, feed)
 	local response = http.request {
 	method='get',
 	url = 'http://api.cosm.com/v2/feeds/'..feed..'.xml',
