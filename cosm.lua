@@ -1,3 +1,7 @@
+--required for parsing XML response from Cosm
+local lom = require 'lxp.lom'
+local xpath = require 'webscriptio/lib/xpath.lua'
+
 local read_current = function (apikey,feed, datastream) 
 	local response = http.request {
 	method='get',
@@ -68,8 +72,7 @@ function isAlive(apikey, feed)
 	method='get',
 	url = 'http://api.cosm.com/v2/feeds/'..feed..'.xml',
 	headers = { ["X-PachubeApiKey"] = tostring(apikey) } }
-	local condition =
-        xpath.selectNodes(lom.parse(response.content), '//status')[1]
+	local condition = xpath.selectNodes(lom.parse(response.content), '//status')[1]
 	
 	return condition[1]
 end
