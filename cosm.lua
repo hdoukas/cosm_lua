@@ -20,13 +20,16 @@ local read_24h = function (apikey, feed, datastream)
 	local sum = 0
 	local debug =""
 	local max = -math.huge
-	local min = math.huge
-	for i=1,# values do
-        	sum=sum+values[i].value
-        	max = math.max( max, values[i].value)
-		min = math.min( min, values[i].value)
-  	end
-	return {sum/#values, max, min}		
+	if values ~= null then
+	  for i=1,# values do
+             sum=sum+values[i].value
+	     max = math.max( max, values[i].value)
+             min = math.min( min, values[i].value)
+  	  end
+	  return {sum/#values, max, min}	
+        else 
+          return "Feed must be frozen!"
+	end	
 end
 
 -- returns something like: {"datastreams": ["cpu_0,2012-11-08T17:30:28.877620Z,24.50", "cpu_1,2012-11-08T17:30:28.877620Z,26.57"], "size": 2} 
