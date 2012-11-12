@@ -20,6 +20,7 @@ local read_24h = function (apikey, feed, datastream)
 	local sum = 0
 	local debug =""
 	local max = -math.huge
+        local min = math.huge
 	if values ~= null then
 	  for i=1,# values do
              sum=sum+values[i].value
